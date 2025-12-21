@@ -112,6 +112,7 @@ namespace MerryXmas
 
             Console.WriteLine(sb.ToString());
             Console.ResetColor();
+            Console.ReadKey();
         }
     }
 }

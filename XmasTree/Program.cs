@@ -13,7 +13,7 @@ namespace MerryXmas
             var sb = new StringBuilder();
 
             // ----------------------------
-            // 1. Random greeting (FIRST)
+            // 1. Greeting text
             // ----------------------------
             string[] greetings =
             {
@@ -88,7 +88,7 @@ namespace MerryXmas
             }
 
             // ----------------------------
-            // 6. Trunk (centered)
+            // 6. Trunk
             // ----------------------------
             int trunkWidth = Math.Max(3, maxWidth / 6);
             if (trunkWidth % 2 == 0) trunkWidth++;
@@ -104,7 +104,7 @@ namespace MerryXmas
             }
 
             // ----------------------------
-            // 7. Greeting (centered)
+            // 7. Greeting
             // ----------------------------
             sb.AppendLine();
             sb.Append(' ', (maxWidth - greeting.Length) / 2);

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using XmasTree.Resources;
 
-namespace MerryXmas
+namespace XmasTree
 {
     internal class Program
     {

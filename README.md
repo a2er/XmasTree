@@ -1,3 +1,3 @@
 # XmasTree
 
-![1](XmasTree/Images/en/1.png)
+![1](Images/en/1.png)

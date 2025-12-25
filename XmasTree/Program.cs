@@ -7,13 +7,11 @@ namespace XmasTree
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-
             var random = new Random();
             var sb = new StringBuilder();
 
             // ----------------------------
-            // 1. Greeting text
+            // 1. Greeting texts
             // ----------------------------
             string[] greetings =
             [
@@ -23,9 +21,7 @@ namespace XmasTree
                 Strings.SeasonGreetings,
                 Strings.JoyfulHolidays,
             ];
-
-            string greeting = greetings[random.Next(greetings.Length)];
-            int minRequiredWidth = greeting.Length;
+            int minRequiredWidth = greetings.Max(g => g.Length);
 
             // ----------------------------
             // 2. Smooth tree tip
@@ -79,6 +75,8 @@ namespace XmasTree
             // ----------------------------
             // 5. Render tree
             // ----------------------------
+            sb.AppendLine();
+
             foreach (int width in treeWidths)
             {
                 int padding = (maxWidth - width) / 2;
@@ -103,14 +101,53 @@ namespace XmasTree
                 sb.AppendLine();
             }
 
-            // ----------------------------
-            // 7. Greeting
-            // ----------------------------
             sb.AppendLine();
-            sb.Append(' ', (maxWidth - greeting.Length) / 2);
-            sb.AppendLine(greeting);
 
-            Console.WriteLine(sb.ToString());
+            // ----------------------------
+            // 7. Blinking Christmas colors animation
+            // ----------------------------
+            ConsoleColor[] colors =
+            [
+                ConsoleColor.DarkRed,
+                ConsoleColor.DarkGreen,
+                ConsoleColor.DarkYellow,
+            ];
+
+            Console.CursorVisible = false;
+
+            int lastColorIndex = -1;
+            int consoleWidth = Console.WindowWidth;
+            int leftMargin = Math.Max(0, (consoleWidth - maxWidth) / 2);
+
+            do
+            {
+                int colorIndex = random.Next(colors.Length);
+                if (colorIndex == lastColorIndex)
+                {
+                    colorIndex = (colorIndex + 1) % colors.Length;
+                }
+                ConsoleColor nextColor = colors[colorIndex];
+
+                string greeting = greetings[random.Next(greetings.Length)];
+                int greetingPadding = (maxWidth - greeting.Length) / 2;
+                
+                Console.Clear();
+                Console.ForegroundColor = nextColor;
+
+                string[] lines = sb.ToString().Split(Environment.NewLine);
+                foreach (string line in lines)
+                {
+                    Console.SetCursorPosition(leftMargin, Console.CursorTop);
+                    Console.WriteLine(line);
+                }
+                
+                Console.SetCursorPosition(leftMargin + greetingPadding, Console.CursorTop);
+                Console.WriteLine(greeting);
+                
+                lastColorIndex = colorIndex;
+                Thread.Sleep(600);
+            } while (!Console.KeyAvailable);
+
             Console.ResetColor();
             Console.ReadKey();
         }

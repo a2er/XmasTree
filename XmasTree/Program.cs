@@ -16,13 +16,13 @@ namespace XmasTree
             // 1. Greeting text
             // ----------------------------
             string[] greetings =
-            {
+            [
                 Strings.MerryXmas,
                 Strings.MerryChristmas,
                 Strings.HappyChristmas,
                 Strings.SeasonGreetings,
                 Strings.JoyfulHolidays,
-            };
+            ];
 
             string greeting = greetings[random.Next(greetings.Length)];
             int minRequiredWidth = greeting.Length;
